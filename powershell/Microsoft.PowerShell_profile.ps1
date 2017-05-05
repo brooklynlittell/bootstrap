@@ -30,8 +30,6 @@ Set-Alias vsadmin vs2017admin
 ##-------------------------------------------
 ## Misc functions
 ##-------------------------------------------
-function prompt { $env:computername + "\" + (get-location) + "> " }
-
 function pro { vsc $profile }
 
 function dev { Set-Location "C:\dev" }
@@ -63,15 +61,15 @@ function zipall($delete) { ls -Directory | % { sz a -t7z "$_.7z" ".\$_\*"; if ($
 ##-------------------------------------------
 ## Load Git
 ##-------------------------------------------
-#if (Test-Path "$env:LOCALAPPDATA\GitHub\shell.ps1")
-#{
-#	. (Resolve-Path "$env:LOCALAPPDATA\GitHub\shell.ps1")
-#	. $env:github_posh_git\profile.example.ps1
+if (Test-Path "$env:LOCALAPPDATA\GitHub\shell.ps1")
+{
+	. (Resolve-Path "$env:LOCALAPPDATA\GitHub\shell.ps1")
+	. $env:github_posh_git\profile.example.ps1
 
 	# Shell.ps1 overwrites TMP and TEMP with a version with a trailing '\' 
-#	$env:TMP = $env:TEMP = [system.io.path]::gettemppath().TrimEnd('\') 
-#}
-#else { Write-Warning "Git Shell not present" }
+	$env:TMP = $env:TEMP = [system.io.path]::gettemppath().TrimEnd('\') 
+}
+else { Write-Warning "Git Shell not present" }
 
 ##-------------------------------------------
 ## Key Remaps
