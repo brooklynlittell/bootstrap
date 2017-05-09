@@ -34,6 +34,8 @@ function pro { vsc $profile }
 
 function dev { Set-Location "C:\dev" }
 
+function gfa { git fetch --all -p }
+
 function hosts { Start-Process $editor -ArgumentList "-multiInst -notabbar -nosession C:\WINDOWS\system32\drivers\etc\hosts" -Verb runAs }
 
 function mklink { cmd /c mklink $args }
