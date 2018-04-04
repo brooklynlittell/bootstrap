@@ -44,6 +44,8 @@ function mklink { cmd /c mklink $args }
 
 function mkdlink { cmd /c mklink /D $args }
 
+function mkfile([Parameter(Mandatory=$true)]$fileName) { New-Item -Name $fileName -ItemType File }
+
 function which([Parameter(Mandatory=$true)]$cmd) { (gcm $cmd).Path 2>$null }
 
 function admin([Parameter(Mandatory=$true)]$cmd) { Start-Process $cmd -Verb runAs }
