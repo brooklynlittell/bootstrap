@@ -1,0 +1,5 @@
+{
+    "window.zoomLevel": 0,
+    "editor.renderWhitespace": "boundary",
+    "powershell.integratedConsole.showOnStartup": false,
+}
