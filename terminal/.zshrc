@@ -25,7 +25,10 @@ function r() { grep "$1" ${@:2} -R . }
 # Create a folder and move into it in one command
 function mkcd() { mkdir -p "$@" && cd "$_"; }
 
+function new() { touch "$1" }
+
 alias g='git'
+alias gfa='git fetch --all -p'
 alias gpa='git branch --merged| egrep -v "(^\*|master|dev)" | xargs git branch -d'
 alias dev='cd ~/dev'
 
