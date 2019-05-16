@@ -5,18 +5,17 @@ export ZSH=/Users/brandonlittell/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 ZSH_THEME="robbyrussell"
 
-plugins=(git)
+plugins=(git-prompt)
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin"
-export PATH="/usr/local/heroku/bin:$PATH"
-
-export NVM_DIR="/Users/brandonlittell/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 source $ZSH/oh-my-zsh.sh
 
 export EDITOR=code
+
+ZSH_THEME_GIT_PROMPT_SUFFIX=") "
+PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_super_status)'
+RPROMPT=''
 
 # File search functions
 function f() { find . -iname "*$1*" ${@:2} }
@@ -31,5 +30,3 @@ alias g='git'
 alias gfa='git fetch --all -p'
 alias gpa='git branch --merged| egrep -v "(^\*|master|dev)" | xargs git branch -d'
 alias dev='cd ~/dev'
-
-
