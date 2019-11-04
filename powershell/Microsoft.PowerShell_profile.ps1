@@ -1,9 +1,9 @@
 ##-------------------------------------------
 ## Variables
 ##-------------------------------------------
-if (Test-Path "${env:ProgramFiles(x86)}\Microsoft VS Code\Code.exe")
+if (Test-Path "C:\Users\${env:Username}\AppData\Local\Programs\Microsoft VS Code\Code.exe")
 {
-	$editor = "${env:ProgramFiles(x86)}\Microsoft VS Code\Code.exe"
+	$editor = "C:\Users\${env:Username}\AppData\Local\Programs\Microsoft VS Code\Code.exe"
 }
 else
 {
@@ -15,17 +15,15 @@ else
 ## Aliases
 ##-------------------------------------------
 Set-Alias claer clear
-Set-Alias vsc $editor
 Set-Alias code $editor
-Set-Alias vs "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\devenv.exe"
-Set-Alias vs15 "${env:ProgramFiles(x86)}\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe"
+Set-Alias vs "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe"
 Set-Alias sz "$env:ProgramFiles\7-Zip\7z.exe" 
 
 # to add arguments to a command, you need to create a function and then alias that
 function vscodeadmin {Start-Process $editor -verb runAs}
-Set-Alias vscadmin vscodeadmin
-function vs2017admin {Start-Process "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\devenv.exe" -verb runAs} 
-Set-Alias vsadmin vs2017admin
+Set-Alias codeadmin vscodeadmin
+function vs2019admin {Start-Process "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe" -verb runAs} 
+Set-Alias vsadmin vs2019admin
 
 ##-------------------------------------------
 ## Misc functions
