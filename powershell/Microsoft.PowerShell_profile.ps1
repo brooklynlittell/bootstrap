@@ -1,34 +1,42 @@
 ##-------------------------------------------
 ## Variables
 ##-------------------------------------------
-if (Test-Path "C:\Users\${env:Username}\AppData\Local\Programs\Microsoft VS Code\Code.exe")
-{
-	$editor = "C:\Users\${env:Username}\AppData\Local\Programs\Microsoft VS Code\Code.exe"
-}
-else
-{
+$code = "C:\Users\${env:Username}\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+if (Test-Path $code) { $editor = $code }
+else {
 	Write-Warning "VS Code not found, defaulting to notepad. Editor-based shortcuts might be broken."
 	$editor = "C:\Windows\system32\notepad.exe"
 }
+
+$vs2019 = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe"
+$vs2019c = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe"
+if (Test-Path $vs2019) { $vs = $vs2019 }
+elseif (Test-Path $vs2019c) { $vs = $vs2019c }
+else { Write-Warning "Visual Studio is not installed" }
 
 ##-------------------------------------------
 ## Aliases
 ##-------------------------------------------
 Set-Alias claer clear
-Set-Alias code $editor
-Set-Alias vs "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe"
-Set-Alias sz "$env:ProgramFiles\7-Zip\7z.exe" 
+Set-Alias code $code
+Set-Alias edit $editor
+Set-Alias sz "$env:ProgramFiles\7-Zip\7z.exe"
+Set-Alias open start
 
 # to add arguments to a command, you need to create a function and then alias that
-function vscodeadmin {Start-Process $editor -verb runAs}
+function vscodeadmin {Start-Process $code -verb runAs}
 Set-Alias codeadmin vscodeadmin
-function vs2019admin {Start-Process "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe" -verb runAs} 
-Set-Alias vsadmin vs2019admin
+
+if ($vs) {
+	Set-Alias vs $vs
+	function vsrunasadmin {Start-Process $vs -verb runAs} 
+	Set-Alias vsadmin vsrunasadmin
+}
 
 ##-------------------------------------------
 ## Misc functions
 ##-------------------------------------------
-function pro { vsc $profile }
+function pro { edit $profile }
 
 function dev { Set-Location "C:\dev" }
 
@@ -74,15 +82,6 @@ if (Test-Path "$env:LOCALAPPDATA\GitHub\shell.ps1")
 	$env:TMP = $env:TEMP = [system.io.path]::gettemppath().TrimEnd('\') 
 }
 else { Write-Warning "Git Shell not present" }
-
-##-------------------------------------------
-## Key Remaps
-##-------------------------------------------
-# flip Up/Down and F8/Shift+F8
-#Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
-#Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
-#Set-PSReadlineKeyHandler -Key F8 -Function PreviousHistory
-#Set-PSReadlineKeyHandler -Key Shift+F8 -Function NextHistory
 
 ##-------------------------------------------
 ## Console State
