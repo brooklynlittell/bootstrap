@@ -44,6 +44,8 @@ function gfa { git fetch --all -p }
 
 function gpa { git branch --merged | sls -n '(^\*|master|dev)' | %{$_.toString().trim()} | %{git branch -D $_}}
 
+function gpb { git branch | sls -n '(^\*|master|dev)' | sls '(^\*|brandon|branli)' | %{$_.toString().trim()} | %{git branch -D $_}}
+
 function hosts { Start-Process $editor -ArgumentList "-multiInst -notabbar -nosession C:\WINDOWS\system32\drivers\etc\hosts" -Verb runAs }
 
 function mklink { cmd /c mklink $args }
