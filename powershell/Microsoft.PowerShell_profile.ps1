@@ -42,7 +42,7 @@ function dev { Set-Location "C:\dev" }
 
 function gfa { git fetch --all -p }
 
-function gpa { git checkout master; git pull --prune; git branch -D $(git branch --merged).trim(); }
+function gpa { git branch --merged | sls -n '(^\*|master|dev)' | %{&"git branch -D" $_}}
 
 function hosts { Start-Process $editor -ArgumentList "-multiInst -notabbar -nosession C:\WINDOWS\system32\drivers\etc\hosts" -Verb runAs }
 
