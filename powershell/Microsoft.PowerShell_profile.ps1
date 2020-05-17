@@ -48,6 +48,12 @@ function gpa {
 	git branch --merged | sls -n '(^\*|master|dev)' | %{$_.toString().trim()} | %{git branch -D $_}
 	git branch -v | sls -Pattern 'gone]' | %{$_.toString().Trim().Split(" ")[0]} | %{git branch -D $_}
 }
+function gpam {
+	git checkout master
+	gfa
+	git branch --merged | sls -n '(^\*|master|dev)' | %{$_.toString().trim()} | %{git branch -D $_}
+	git branch -v | sls -Pattern 'gone]' | %{$_.toString().Trim().Split(" ")[0]} | %{git branch -D $_}
+}
 
 function hosts { Start-Process $editor -ArgumentList "-multiInst -notabbar -nosession C:\WINDOWS\system32\drivers\etc\hosts" -Verb runAs }
 
