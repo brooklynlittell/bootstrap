@@ -1,7 +1,7 @@
 ##-------------------------------------------
 ## Variables
 ##-------------------------------------------
-$code = "C:\Users\${env:Username}\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+$code = "C:\Users\${env:Username}\AppData\Local\Programs\Microsoft VS Code\bin\Code.cmd"
 if (Test-Path $code) { $editor = $code }
 else {
 	Write-Warning "VS Code not found, defaulting to notepad. Editor-based shortcuts might be broken."
