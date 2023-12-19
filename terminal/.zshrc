@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/brandonlittell/.oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -15,7 +15,7 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR="code"
 
 ZSH_THEME_GIT_PROMPT_SUFFIX=") "
-PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_super_status)'
+PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%}> ' # $(git_super_status)'
 RPROMPT=''
 
 # File search functions
