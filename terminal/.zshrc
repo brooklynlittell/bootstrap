@@ -1,18 +1,24 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# ZSH_THEME="robbyrussell"
 ZSH_THEME="avit"
 
-plugins=(git colored-man colorize brew osx zsh-syntax-highlighting)
+plugins=(git colorize brew)
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin"
 
 source $ZSH/oh-my-zsh.sh
 
 export EDITOR="code"
+export GODOT="/Applications/Godot.app/Contents/MacOS/Godot"
+
+export DOTNET_CLI_TELEMETRY_OPTOUT=1 # Disable analytics
+export DOTNET_ROOT="/usr/local/share/dotnet"
+# Add the .NET SDK to the system paths so we can use the `dotnet` tool.
+export PATH="/usr/local/share/dotnet:$PATH"
+export PATH="/usr/local/share/dotnet/sdk:$PATH"
+export PATH="$HOME/.dotnet/tools:$PATH"
+# Run this if you ever run into errors while doing a `dotnet restore`
+alias nugetclean="dotnet nuget locals --clear all"
 
 ZSH_THEME_GIT_PROMPT_SUFFIX=") "
 PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%}> ' # $(git_super_status)'
